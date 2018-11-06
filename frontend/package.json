@@ -1,0 +1,30 @@
+{
+  "name": "apidocs",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "rm -rf ../public/vendor/apidocs/{js,css,img} && vue-cli-service build --no-clean"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "lodash": "^4.17.11",
+    "v-jsoneditor": "^1.1.2",
+    "vue": "^2.5.17",
+    "vue-clipboard2": "^0.2.1",
+    "vue-router": "^3.0.1",
+    "vue-sweetalert2": "^1.5.7",
+    "vuex": "^3.0.1"
+  },
+  "devDependencies": {
+    "@fullhuman/postcss-purgecss": "^1.1.0",
+    "@ky-is/vue-cli-plugin-tailwind": "^1.5.0",
+    "@vue/cli-plugin-babel": "^3.0.1",
+    "@vue/cli-service": "^3.0.1",
+    "node-sass": "^4.9.0",
+    "postcss-preset-env": "^6.3.0",
+    "sass-loader": "^7.0.1",
+    "tailwindcss": "^0.7.0",
+    "vue-template-compiler": "^2.5.17"
+  }
+}

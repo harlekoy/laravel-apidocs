@@ -1,0 +1,43 @@
+{
+    "name": "betprophet/apidocs",
+    "description": ":description",
+    "license": "license",
+    "authors": [
+        {
+            "name": "Harlequin Doyon",
+            "email": "harley.doyon@betprophet.co",
+            "homepage": "www.betprophet.co"
+        }
+    ],
+    "homepage": "https://github.com/betprophet/apidocs",
+    "keywords": ["Laravel", "ApiDocs"],
+    "require": {
+        "illuminate/support": "~5"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~7.0",
+        "mockery/mockery": "^1.1",
+        "orchestra/testbench": "~3.0",
+        "sempro/phpunit-pretty-print": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Betprophet\\ApiDocs\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Betprophet\\ApiDocs\\Tests\\": "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Betprophet\\ApiDocs\\Providers\\ApiDocsServiceProvider"
+            ],
+            "aliases": {
+                "ApiDocs": "Betprophet\\ApiDocs\\Facades\\ApiDocs"
+            }
+        }
+    }
+}
