@@ -2,6 +2,7 @@
 
 namespace Betprophet\ApiDocs\Providers;
 
+use Betprophet\ApiDocs\Commands\ApiDocsInstall;
 use Betprophet\ApiDocs\Providers\ApiDocsRouteServiceProvider;
 use Illuminate\Support\ServiceProvider;
 
@@ -77,7 +78,9 @@ class ApiDocsServiceProvider extends ServiceProvider
         ], 'apidocs.views');*/
 
         // Registering package commands.
-        // $this->commands([]);
+        $this->commands([
+            ApiDocsInstall::class,
+        ]);
     }
 
     /**

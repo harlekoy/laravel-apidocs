@@ -19,6 +19,7 @@ class Endpoint extends Model
         'method',
         'parameters',
         'sample_response',
+        'endpoint',
     ];
 
     /**
