@@ -9,6 +9,10 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
+      path: '/apidocs',
+      redirect: { name: 'home' }
+    },
+    {
       path: '/apidocs/list',
       name: 'home',
       component: Home
