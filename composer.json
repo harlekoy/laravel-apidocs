@@ -1,6 +1,6 @@
 {
     "name": "harlekoy/apidocs",
-    "description": ":description",
+    "description": "Replacement for Swagger. It is built for Laravel",
     "license": "MIT",
     "authors": [
         {
