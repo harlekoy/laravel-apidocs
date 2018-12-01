@@ -1,16 +1,16 @@
 {
-    "name": "betprophet/apidocs",
+    "name": "harlekoy/apidocs",
     "description": ":description",
     "license": "license",
     "authors": [
         {
             "name": "Harlequin Doyon",
-            "email": "harley.doyon@betprophet.co",
-            "homepage": "www.betprophet.co"
+            "email": "harlequin.doyon@gmail.com",
+            "homepage": "https://www.linkedin.com/in/harlequin-doyon-6a0318100/"
         }
     ],
-    "homepage": "https://github.com/betprophet/apidocs",
-    "keywords": ["Laravel", "ApiDocs"],
+    "homepage": "https://github.com/harlekoy/apidocs",
+    "keywords": ["Laravel", "API Docs"],
     "require": {
         "illuminate/support": "~5"
     },
@@ -22,21 +22,21 @@
     },
     "autoload": {
         "psr-4": {
-            "Betprophet\\ApiDocs\\": "src/"
+            "Harlekoy\\ApiDocs\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Betprophet\\ApiDocs\\Tests\\": "tests"
+            "Harlekoy\\ApiDocs\\Tests\\": "tests"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Betprophet\\ApiDocs\\Providers\\ApiDocsServiceProvider"
+                "Harlekoy\\ApiDocs\\Providers\\ApiDocsServiceProvider"
             ],
             "aliases": {
-                "ApiDocs": "Betprophet\\ApiDocs\\Facades\\ApiDocs"
+                "ApiDocs": "Harlekoy\\ApiDocs\\Facades\\ApiDocs"
             }
         }
     },

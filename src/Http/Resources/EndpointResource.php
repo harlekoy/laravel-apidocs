@@ -1,6 +1,6 @@
 <?php
 
-namespace Betprophet\ApiDocs\Http\Resources;
+namespace Harlekoy\ApiDocs\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 

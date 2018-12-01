@@ -12,7 +12,7 @@ This is where your description should go. Take a look at [contributing.md](contr
 Via Composer
 
 ``` bash
-$ composer require betprophet/apidocs
+$ composer require harlekoy/apidocs
 ```
 
 ## Usage
@@ -33,7 +33,7 @@ Please see [contributing.md](contributing.md) for details and a todolist.
 
 ## Security
 
-If you discover any security related issues, please email harley.doyon@betprophet.co instead of using the issue tracker.
+If you discover any security related issues, please email harley.doyon@harlekoy.co instead of using the issue tracker.
 
 ## Credits
 
@@ -44,14 +44,14 @@ If you discover any security related issues, please email harley.doyon@betprophe
 
 license. Please see the [license file](license.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/betprophet/apidocs.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/betprophet/apidocs.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/betprophet/apidocs/master.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/harlekoy/apidocs.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/harlekoy/apidocs.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/harlekoy/apidocs/master.svg?style=flat-square
 [ico-styleci]: https://styleci.io/repos/12345678/shield
 
-[link-packagist]: https://packagist.org/packages/betprophet/apidocs
-[link-downloads]: https://packagist.org/packages/betprophet/apidocs
-[link-travis]: https://travis-ci.org/betprophet/apidocs
+[link-packagist]: https://packagist.org/packages/harlekoy/apidocs
+[link-downloads]: https://packagist.org/packages/harlekoy/apidocs
+[link-travis]: https://travis-ci.org/harlekoy/apidocs
 [link-styleci]: https://styleci.io/repos/12345678
-[link-author]: https://github.com/betprophet
+[link-author]: https://github.com/harlekoy
 [link-contributors]: ../../contributors]

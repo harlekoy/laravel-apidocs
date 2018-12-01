@@ -1,8 +1,8 @@
 <?php
 
-namespace Betprophet\ApiDocs;
+namespace Harlekoy\ApiDocs;
 
-use Betprophet\ApiDocs\Endpoint;
+use Harlekoy\ApiDocs\Endpoint;
 use Illuminate\Database\Eloquent\Model;
 
 class ApiGroup extends Model

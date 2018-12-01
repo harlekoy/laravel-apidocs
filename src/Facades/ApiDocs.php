@@ -1,6 +1,6 @@
 <?php
 
-namespace Betprophet\ApiDocs\Facades;
+namespace Harlekoy\ApiDocs\Facades;
 
 use Illuminate\Support\Facades\Facade;
 

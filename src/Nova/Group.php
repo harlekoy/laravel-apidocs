@@ -1,6 +1,6 @@
 <?php
 
-namespace Betprophet\ApiDocs\Nova;
+namespace Harlekoy\ApiDocs\Nova;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\HasMany;
@@ -23,7 +23,7 @@ class Group extends Resource
      *
      * @var string
      */
-    public static $model = 'Betprophet\\ApiDocs\\ApiGroup';
+    public static $model = 'Harlekoy\\ApiDocs\\ApiGroup';
 
     /**
      * The single value that should be used to represent the resource when being displayed.

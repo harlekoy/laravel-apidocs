@@ -1,8 +1,8 @@
 <?php
 
-namespace Betprophet\ApiDocs\Http\Middleware;
+namespace Harlekoy\ApiDocs\Http\Middleware;
 
-use Betprophet\ApiDocs\ApiDocs;
+use Harlekoy\ApiDocs\ApiDocs;
 
 class Authenticate
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Betprophet\ApiDocs\Http\Resources;
+namespace Harlekoy\ApiDocs\Http\Resources;
 
-use Betprophet\ApiDocs\Http\Resources\EndpointResource;
+use Harlekoy\ApiDocs\Http\Resources\EndpointResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class GroupResource extends JsonResource

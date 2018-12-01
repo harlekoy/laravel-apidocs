@@ -1,6 +1,6 @@
 <?php
 
-namespace Betprophet\ApiDocs\Providers;
+namespace Harlekoy\ApiDocs\Providers;
 
 use Studio\Totem\Task;
 use Illuminate\Support\Facades\Route;
@@ -15,7 +15,7 @@ class ApiDocsRouteServiceProvider extends RouteServiceProvider
      *
      * @var string
      */
-    protected $namespace = 'Betprophet\ApiDocs\Http\Controllers';
+    protected $namespace = 'Harlekoy\ApiDocs\Http\Controllers';
 
     /**
      * Define the routes for the application.

@@ -1,6 +1,6 @@
 <?php
 
-namespace Betprophet\ApiDocs\Http\Requests;
+namespace Harlekoy\ApiDocs\Http\Requests;
 
 class EndpointRequest extends Request
 {

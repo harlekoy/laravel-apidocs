@@ -1,6 +1,6 @@
 <?php
 
-namespace Betprophet\ApiDocs\Traits;
+namespace Harlekoy\ApiDocs\Traits;
 
 trait AuthorizesRequests
 {

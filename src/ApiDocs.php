@@ -1,8 +1,8 @@
 <?php
 
-namespace Betprophet\ApiDocs;
+namespace Harlekoy\ApiDocs;
 
-use Betprophet\ApiDocs\Traits\AuthorizesRequests;
+use Harlekoy\ApiDocs\Traits\AuthorizesRequests;
 
 class ApiDocs
 {

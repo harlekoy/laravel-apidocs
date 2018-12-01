@@ -1,6 +1,6 @@
 <?php
 
-namespace Betprophet\ApiDocs\Http\Controllers;
+namespace Harlekoy\ApiDocs\Http\Controllers;
 
 use Illuminate\Routing\Controller;
 

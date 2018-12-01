@@ -1,6 +1,6 @@
 <?php
 
-// Available placeholders: Betprophet, ApiDocs, betprophet, apidocs
+// Available placeholders: Harlekoy, ApiDocs, apidocs
 return [
     'src/MyPackage.php' => 'src/ApiDocs.php',
     'config/mypackage.php' => 'config/apidocs.php',

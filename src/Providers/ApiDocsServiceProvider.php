@@ -1,9 +1,9 @@
 <?php
 
-namespace Betprophet\ApiDocs\Providers;
+namespace Harlekoy\ApiDocs\Providers;
 
-use Betprophet\ApiDocs\Commands\ApiDocsInstall;
-use Betprophet\ApiDocs\Providers\ApiDocsRouteServiceProvider;
+use Harlekoy\ApiDocs\Commands\ApiDocsInstall;
+use Harlekoy\ApiDocs\Providers\ApiDocsRouteServiceProvider;
 use Illuminate\Support\ServiceProvider;
 
 class ApiDocsServiceProvider extends ServiceProvider
@@ -64,17 +64,17 @@ class ApiDocsServiceProvider extends ServiceProvider
         $this->defineAssetPublishing();
         // // Publishing the views.
         // $this->publishes([
-        //     APIDOCS_PATH.'resources/views' => base_path('resources/views/vendor/betprophet'),
+        //     APIDOCS_PATH.'resources/views' => base_path('resources/views/vendor/harlekoy'),
         // ], 'apidocs.views');
 
         // Publishing assets.
         /*$this->publishes([
-            __DIR__.'/../resources/assets' => public_path('vendor/betprophet'),
+            __DIR__.'/../resources/assets' => public_path('vendor/harlekoy'),
         ], 'apidocs.views');*/
 
         // Publishing the translation files.
         /*$this->publishes([
-            __DIR__.'/../resources/lang' => resource_path('lang/vendor/betprophet'),
+            __DIR__.'/../resources/lang' => resource_path('lang/vendor/harlekoy'),
         ], 'apidocs.views');*/
 
         // Registering package commands.

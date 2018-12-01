@@ -1,11 +1,11 @@
 <?php
 
-use Betprophet\ApiDocs\Http\Middleware\Authenticate;
+use Harlekoy\ApiDocs\Http\Middleware\Authenticate;
 
 return [
     'path' => 'apidocs',
 
-    'name' => 'Betprophet API Endpoints',
+    'name' => 'API Endpoints',
 
     'version' => 'v1.0.0',
 

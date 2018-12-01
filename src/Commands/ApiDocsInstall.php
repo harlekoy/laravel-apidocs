@@ -1,8 +1,8 @@
 <?php
 
-namespace Betprophet\ApiDocs\Commands;
+namespace Harlekoy\ApiDocs\Commands;
 
-use Betprophet\ApiDocs\ApiGroup;
+use Harlekoy\ApiDocs\ApiGroup;
 use Illuminate\Console\Command;
 use Illuminate\Foundation\Console\RouteListCommand;
 use Illuminate\Routing\Route;

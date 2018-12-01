@@ -1,8 +1,8 @@
 <?php
 
-namespace Betprophet\ApiDocs\Nova;
+namespace Harlekoy\ApiDocs\Nova;
 
-use Betprophet\ApiDocs\Nova\Group;
+use Harlekoy\ApiDocs\Nova\Group;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Code;
@@ -26,7 +26,7 @@ class Endpoint extends Resource
      *
      * @var string
      */
-    public static $model = 'Betprophet\\ApiDocs\\Endpoint';
+    public static $model = 'Harlekoy\\ApiDocs\\Endpoint';
 
     /**
      * The single value that should be used to represent the resource when being displayed.

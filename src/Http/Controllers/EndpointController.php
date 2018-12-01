@@ -1,10 +1,10 @@
 <?php
 
-namespace Betprophet\ApiDocs\Http\Controllers;
+namespace Harlekoy\ApiDocs\Http\Controllers;
 
-use Betprophet\ApiDocs\ApiGroup;
-use Betprophet\ApiDocs\Endpoint;
-use Betprophet\ApiDocs\Http\Resources\GroupResource;
+use Harlekoy\ApiDocs\ApiGroup;
+use Harlekoy\ApiDocs\Endpoint;
+use Harlekoy\ApiDocs\Http\Resources\GroupResource;
 use Illuminate\Routing\Controller;
 
 class EndpointController extends Controller
