@@ -1,7 +1,7 @@
 {
     "name": "harlekoy/apidocs",
     "description": ":description",
-    "license": "license",
+    "license": "MIT",
     "authors": [
         {
             "name": "Harlequin Doyon",
