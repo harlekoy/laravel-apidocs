@@ -39,5 +39,7 @@
                 "ApiDocs": "Betprophet\\ApiDocs\\Facades\\ApiDocs"
             }
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
