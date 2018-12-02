@@ -1,4 +1,4 @@
-# ApiDocs
+# API Docs
 
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Total Downloads][ico-downloads]][link-downloads]
@@ -19,6 +19,20 @@ Via Composer
 $ composer require harlekoy/apidocs
 ```
 
+After installing API Docs, publish its assets, and migration file using the `apidocs:install` Artisan command.
+
+``` bash
+$ php artisan apidocs:install
+```
+
+## Updating API Docs
+
+When updating, you should re-publish API Docs's assets:
+
+``` bash
+$ php artisan apidocs:publish
+```
+
 ## Usage
 
 ## Change log
@@ -37,7 +51,7 @@ Please see [contributing.md](contributing.md) for details and a todolist.
 
 ## Security
 
-If you discover any security related issues, please email harley.doyon@harlekoy.co instead of using the issue tracker.
+If you discover any security related issues, please email me@harlekoy.com instead of using the issue tracker.
 
 ## Credits
 
