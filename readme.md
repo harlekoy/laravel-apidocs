@@ -7,6 +7,10 @@
 
 This is where your description should go. Take a look at [contributing.md](contributing.md) to see a to do list.
 
+<p align="center">
+<img src="https://user-images.githubusercontent.com/10015302/49337278-10868980-f64c-11e8-9bfe-29dc1c582911.png">
+</p>
+
 ## Installation
 
 Via Composer
