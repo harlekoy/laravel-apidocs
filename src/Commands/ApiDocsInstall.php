@@ -4,12 +4,16 @@ namespace Harlekoy\ApiDocs\Commands;
 
 use Harlekoy\ApiDocs\ApiGroup;
 use Illuminate\Console\Command;
+use Illuminate\Console\DetectsApplicationNamespace;
 use Illuminate\Foundation\Console\RouteListCommand;
 use Illuminate\Routing\Route;
 use Illuminate\Routing\Router;
+use Illuminate\Support\Str;
 
 class ApiDocsInstall extends RouteListCommand
 {
+    use DetectsApplicationNamespace;
+
     /**
      * The console command name.
      *
@@ -27,7 +31,7 @@ class ApiDocsInstall extends RouteListCommand
     /**
      * @var string
      */
-    protected $prefix = 'api/v1';
+    protected $prefix = 'api';
 
     /**
      * @var string
@@ -58,7 +62,7 @@ class ApiDocsInstall extends RouteListCommand
             'Enter name to customize the middleware used to generate this doc? Default:', 'api'
         );
 
-        $this->prefix = $this->ask('Enter api prefix and version? Default:', 'api/v1');
+        $this->prefix = $this->ask('Enter api prefix and version? Default:', 'api');
     }
 
     /**
@@ -82,6 +86,73 @@ class ApiDocsInstall extends RouteListCommand
                 ]);
             }
         }
+
+        $this->comment('Publishing API Docs Service Provider...');
+        $this->callSilent('vendor:publish', ['--tag' => 'apidocs-provider']);
+
+        $this->comment('Migrating API Docs tables...');
+        $this->callSilent('migrate');
+
+        $this->comment('Publishing API Docs Assets...');
+        $this->callSilent('vendor:publish', ['--tag' => 'apidocs-assets']);
+
+        $this->registerApiDocsConfig();
+        $this->registerApiDocsServiceProvider();
+
+        $this->info('API Docs scaffolding installed successfully.');
+    }
+
+    /**
+     * Register API Docs configuration.
+     *
+     * @return void
+     */
+    public function registerApiDocsConfig()
+    {
+        $this->comment('Publishing API Docs Configuration...');
+        $this->callSilent('vendor:publish', ['--tag' => 'apidocs-config']);
+
+        $config = file_get_contents(config_path('apidocs.php'));
+
+        if (!Str::contains($config, "'/api/v1'")) {
+            return;
+        }
+
+        $version = trim($this->prefix, '/');
+
+        file_put_contents(config_path('apidocs.php'), str_replace(
+            "'/api/v1'",
+            "'/{$version}'",
+            $config
+        ));
+    }
+
+    /**
+     * Register the API Docs service provider in the application configuration file.
+     *
+     * @return void
+     */
+    protected function registerApiDocsServiceProvider()
+    {
+        $namespace = str_replace_last('\\', '', $this->getAppNamespace());
+
+        $appConfig = file_get_contents(config_path('app.php'));
+
+        if (Str::contains($appConfig, $namespace.'\\Providers\\ApiDocsServiceProvider::class')) {
+            return;
+        }
+
+        file_put_contents(config_path('app.php'), str_replace(
+            "{$namespace}\\Providers\EventServiceProvider::class,".PHP_EOL,
+            "{$namespace}\\Providers\EventServiceProvider::class,".PHP_EOL."        {$namespace}\Providers\ApiDocsServiceProvider::class,".PHP_EOL,
+            $appConfig
+        ));
+
+        file_put_contents(app_path('Providers/ApiDocsServiceProvider.php'), str_replace(
+            "namespace App\Providers;",
+            "namespace {$namespace}\Providers;",
+            file_get_contents(app_path('Providers/ApiDocsServiceProvider.php'))
+        ));
     }
 
     public function filterRoutes()
@@ -93,13 +164,13 @@ class ApiDocsInstall extends RouteListCommand
                 );
 
                 return in_array($this->middleware, $middlewares)
-                    && str_contains(array_get($route, 'uri'), 'api/v1');
+                    && str_contains(array_get($route, 'uri'), $this->prefix);
             })
             ->map(function ($route) {
                 $uri = array_get($route, 'uri');
 
                 return array_merge($route, [
-                    'uri' => str_replace('api/v1', '', $uri),
+                    'uri' => str_replace($this->prefix, '', $uri),
                 ]);
             })
             ->groupBy(function ($route) {

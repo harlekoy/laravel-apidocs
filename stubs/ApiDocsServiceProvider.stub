@@ -1,0 +1,34 @@
+<?php
+
+namespace App\Providers;
+
+use Illuminate\Support\Facades\Gate;
+use Harlekoy\ApiDocs\Providers\ApiDocsApplicationServiceProvider;
+
+class ApiDocsServiceProvider extends ApiDocsApplicationServiceProvider
+{
+    /**
+     * Register any application services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+    }
+
+    /**
+     * Register the Telescope gate.
+     *
+     * This gate determines who can access Telescope in non-local environments.
+     *
+     * @return void
+     */
+    protected function gate()
+    {
+        Gate::define('viewApiDocs', function ($user) {
+            return in_array($user->email, [
+                //
+            ]);
+        });
+    }
+}

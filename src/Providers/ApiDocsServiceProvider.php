@@ -2,7 +2,10 @@
 
 namespace Harlekoy\ApiDocs\Providers;
 
+use Harlekoy\ApiDocs\ApiDocs;
 use Harlekoy\ApiDocs\Commands\ApiDocsInstall;
+use Harlekoy\ApiDocs\Commands\InstallCommand;
+use Harlekoy\ApiDocs\Commands\PublishCommand;
 use Harlekoy\ApiDocs\Providers\ApiDocsRouteServiceProvider;
 use Illuminate\Support\ServiceProvider;
 
@@ -61,25 +64,12 @@ class ApiDocsServiceProvider extends ServiceProvider
      */
     protected function bootForConsole()
     {
-        $this->defineAssetPublishing();
-        // // Publishing the views.
-        // $this->publishes([
-        //     APIDOCS_PATH.'resources/views' => base_path('resources/views/vendor/harlekoy'),
-        // ], 'apidocs.views');
-
-        // Publishing assets.
-        /*$this->publishes([
-            __DIR__.'/../resources/assets' => public_path('vendor/harlekoy'),
-        ], 'apidocs.views');*/
-
-        // Publishing the translation files.
-        /*$this->publishes([
-            __DIR__.'/../resources/lang' => resource_path('lang/vendor/harlekoy'),
-        ], 'apidocs.views');*/
+        $this->definePublishing();
 
         // Registering package commands.
         $this->commands([
             ApiDocsInstall::class,
+            PublishCommand::class,
         ]);
     }
 
@@ -90,17 +80,16 @@ class ApiDocsServiceProvider extends ServiceProvider
      */
     protected function registerResources()
     {
-        // $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'apidocs');
         $this->loadViewsFrom(APIDOCS_PATH.'/resources/views', 'apidocs');
         $this->loadMigrationsFrom(APIDOCS_PATH.'/database/migrations');
     }
 
     /**
-     * Define the asset publishing configuration.
+     * Define the publishing configuration.
      *
      * @return void
      */
-    public function defineAssetPublishing()
+    public function definePublishing()
     {
         $this->publishes([
             APIDOCS_PATH.'/public/vendor/apidocs/js' => public_path('vendor/apidocs/js'),
@@ -117,5 +106,9 @@ class ApiDocsServiceProvider extends ServiceProvider
         $this->publishes([
             APIDOCS_PATH.'/config/apidocs.php' => config_path('apidocs.php'),
         ], 'apidocs-config');
+
+        $this->publishes([
+            APIDOCS_PATH.'/stubs/ApiDocsServiceProvider.stub' => app_path('Providers/ApiDocsServiceProvider.php'),
+        ], 'apidocs-provider');
     }
 }

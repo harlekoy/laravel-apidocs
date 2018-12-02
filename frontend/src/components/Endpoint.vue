@@ -51,7 +51,7 @@ import Parameters from '@/components/Parameters'
 import qs from 'qs'
 import QueryParameters from '@/components/QueryParameters'
 import Response from '@/components/Response'
-import { isEmpty, get } from 'lodash'
+import { isEmpty, get, split, last } from 'lodash'
 import { mapGetters } from 'vuex'
 import { success, fail } from '@/utils/toast'
 
@@ -147,7 +147,13 @@ export default {
 
         this.response = response
       } catch ({ response: { data } }) {
-        let message = get(data, 'message', 'Something went wrong!')
+        let defaultVal = 'Something went wrong!'
+        let message = get(data, 'message', defaultVal)
+        let exception = get(data, 'exception', defaultVal)
+
+        if (!message && exception) {
+          message = last(split(exception, '\\'))
+        }
 
         fail({
           title: '',
