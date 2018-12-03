@@ -74,6 +74,7 @@ export default {
       methodColors: {
         post: 'green',
         put: 'orange',
+        patch: 'orange',
         get: 'blue',
         delete: 'red-light',
       },

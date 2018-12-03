@@ -3,10 +3,13 @@
 namespace Harlekoy\ApiDocs;
 
 use Harlekoy\ApiDocs\ApiGroup;
+use Harlekoy\ApiDocs\Traits\Cachable;
 use Illuminate\Database\Eloquent\Model;
 
 class Endpoint extends Model
 {
+    use Cachable;
+
     /**
      * The attributes that are mass assignable.
      *
