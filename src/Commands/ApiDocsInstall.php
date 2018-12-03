@@ -74,6 +74,29 @@ class ApiDocsInstall extends RouteListCommand
     {
         $this->asks();
 
+        $this->comment('Publishing API Docs Service Provider...');
+        $this->callSilent('vendor:publish', ['--tag' => 'apidocs-provider']);
+
+        $this->comment('Migrating API Docs tables...');
+        $this->callSilent('migrate');
+
+        $this->comment('Publishing API Docs Assets...');
+        $this->callSilent('vendor:publish', ['--tag' => 'apidocs-assets']);
+
+        $this->registerApiDocsConfig();
+        $this->registerApiDocsServiceProvider();
+        $this->registerApiRouteList();
+
+        $this->info('API Docs scaffolding installed successfully.');
+    }
+
+    /**
+     * Register API route list.
+     *
+     * @return void
+     */
+    public function registerApiRouteList()
+    {
         foreach ($this->filterRoutes() as $title => $endpoints) {
             $group = ApiGroup::create([
                 'name' => $title,
@@ -87,19 +110,7 @@ class ApiDocsInstall extends RouteListCommand
             }
         }
 
-        $this->comment('Publishing API Docs Service Provider...');
-        $this->callSilent('vendor:publish', ['--tag' => 'apidocs-provider']);
-
-        $this->comment('Migrating API Docs tables...');
-        $this->callSilent('migrate');
-
-        $this->comment('Publishing API Docs Assets...');
-        $this->callSilent('vendor:publish', ['--tag' => 'apidocs-assets']);
-
-        $this->registerApiDocsConfig();
-        $this->registerApiDocsServiceProvider();
-
-        $this->info('API Docs scaffolding installed successfully.');
+        $this->comment('Scafolding API route list...');
     }
 
     /**
