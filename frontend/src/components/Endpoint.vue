@@ -13,7 +13,7 @@
       class="w-24 uppercase rounded text-white p-2 text-center font-bold"
     >{{ api.method }}</button>
     <h3 class="ml-4 tracking-wide text-md">
-      {{ api.endpoint }}<span class="font-light text-grey-darker">{{ strQueryParams }}</span>
+      {{ endpoint }}<span class="font-light text-grey-darker">{{ strQueryParams }}</span>
     </h3>
     <span class="ml-4">{{ api.description }}</span>
 
@@ -39,7 +39,7 @@
       @executed="request"
     />
 
-    <Response :json="response" />
+    <Response v-model="response" />
   </div>
 </div>
 </template>
@@ -54,6 +54,7 @@ import Response from '@/components/Response'
 import { isEmpty, get, split, last } from 'lodash'
 import { mapGetters } from 'vuex'
 import { success, fail } from '@/utils/toast'
+import { each } from 'lodash'
 
 export default {
   components: {
@@ -125,6 +126,23 @@ export default {
       if (!isEmpty(this.queryParams)) {
         return '?'+qs.stringify(this.queryParams)
       }
+    },
+
+    endpoint () {
+      let endpoint = this.api.endpoint
+      let params = this.api.parameters
+
+      each(params, (param, key) => {
+        let val = params[key]
+
+        if (!val) {
+          val = `{${key}}`
+        }
+
+        endpoint = endpoint.replace(`{${key}}`, val)
+      })
+
+      return endpoint
     }
   },
 

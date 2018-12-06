@@ -22,7 +22,7 @@
     <a
       v-if="hasResponse"
       href="#"
-      @click.prevent=""
+      @click.prevent="clear"
       class="absolute pin-r mr-4 text-sm flex items-center text-grey hover:text-blue-light"
     >
       Clear
@@ -48,7 +48,7 @@ import { success } from '@/utils/toast'
 
 export default {
   props: {
-    json: {
+    value: {
       type: Object,
       default () {
         return {}
@@ -58,9 +58,23 @@ export default {
 
   data () {
     return {
+      json: {},
       options: {
         mode: 'tree',
       }
+    }
+  },
+
+  watch: {
+    value: {
+      immediate: true,
+      handler (current) {
+        this.json = current
+      }
+    },
+
+    json (current) {
+      this.$emit('input', current)
     }
   },
 
@@ -83,6 +97,14 @@ export default {
       success({
         title: '',
         text: 'Copied.',
+      })
+    },
+
+    clear () {
+      this.json =  ''
+      success({
+        title: '',
+        text: 'Cleared.',
       })
     },
   }

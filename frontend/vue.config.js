@@ -4,7 +4,7 @@ module.exports = {
     proxy: 'http://laracon.test'
   },
 
-  baseUrl: '/vendor/apidocs',
+  baseUrl: process.env.NODE_ENV == 'production' ? '/vendor/apidocs' : '/',
 
   // output built static files to Laravel's public dir.
   // note the "build" script in package.json needs to be modified as well.

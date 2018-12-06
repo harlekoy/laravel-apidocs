@@ -87,6 +87,10 @@ export default {
 
     json (current) {
       this.$emit('input', current)
+    },
+
+    params (current) {
+      this.$set(this.json, 'parameters', current)
     }
   },
 
