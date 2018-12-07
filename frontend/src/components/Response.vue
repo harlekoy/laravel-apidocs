@@ -3,6 +3,7 @@
   <h3 class="relative flex items-center border-t block bg-grey-lighter py-2 px-4 shadow text-grey-darker">
     Response
     <span v-if="!hasResponse" class="ml-2 text-xs text-grey">(Empty)</span>
+    <span v-else class="ml-2 text-xs text-red-dark">({{ status }})</span>
     <a
       v-if="hasResponse"
       href="#"
@@ -52,6 +53,13 @@ export default {
       type: Object,
       default () {
         return {}
+      }
+    },
+    status: {
+      type: Number,
+      required: true,
+      default () {
+        return -1
       }
     }
   },

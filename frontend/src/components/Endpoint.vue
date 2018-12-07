@@ -39,7 +39,7 @@
       @executed="request"
     />
 
-    <Response v-model="response" />
+    <Response v-model="response" :status="status" />
   </div>
 </div>
 </template>
@@ -83,6 +83,7 @@ export default {
       response: {},
       json: {},
       show: false,
+      status: -1,
     }
   },
 
@@ -153,7 +154,7 @@ export default {
 
     async request (url, body) {
       try {
-        const { data: response } = await axios({
+        const response = await axios({
           method: this.json.method,
           url: url,
           params: this.queryParams,
@@ -164,11 +165,15 @@ export default {
           text: 'Responded',
         })
 
-        this.response = response
-      } catch ({ response: { data } }) {
+        this.response = response.data
+        this.status = response.status
+      } catch ({ response }) {
+        this.response = response.data
+        this.status = response.status
+
         let defaultVal = 'Something went wrong!'
-        let message = get(data, 'message', defaultVal)
-        let exception = get(data, 'exception', defaultVal)
+        let message = get(response.data, 'message', defaultVal)
+        let exception = get(response.data, 'exception', defaultVal)
 
         if (!message && exception) {
           message = last(split(exception, '\\'))

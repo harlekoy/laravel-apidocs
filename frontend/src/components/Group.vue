@@ -1,6 +1,6 @@
 <template>
 <div>
-  <a @click="toggle" class="text-grey-darkest" href="#">
+  <a @click.prevent="toggle" class="text-grey-darkest" href="#">
     <h2
       :class="{
         'border-b': !show

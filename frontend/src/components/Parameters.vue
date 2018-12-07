@@ -43,7 +43,7 @@
         <button
           @click.prevent="onExecute"
           :class="{
-            'btn-loading': load
+            'btn-loading': loader
           }"
           class="bg-blue-light py-2 px-4 mt-2 shadow text-lg font-bold text-white rounded"
         >Execute</button>
@@ -85,6 +85,13 @@ export default {
       }
     },
 
+    load: {
+      immediate: true,
+      handler (current) {
+        this.loader = current
+      }
+    },
+
     json (current) {
       this.$emit('input', current)
     },
@@ -99,6 +106,7 @@ export default {
       json: {},
       data: {},
       params: {},
+      loader: false,
     }
   },
 
@@ -130,12 +138,12 @@ export default {
 
   methods: {
     onExecute () {
-      this.load = true
+      this.loader = true
       this.$emit('executed', this.url, this.data)
     },
 
     finish () {
-      this.load = false
+      this.loader = false
     }
   }
 }
