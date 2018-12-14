@@ -8,7 +8,7 @@
         </h1>
         <a class="text-grey-darker hover:text-blue flex"
           :href="config.api_url">
-          {{ config.api_url }}
+          {{ apiUrl }}
           <svg class="ml-2 w-4 h-4 fill-current" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 511.626 511.627" style="enable-background:new 0 0 511.626 511.627;" xml:space="preserve">
           <g>
             <path d="M392.857,292.354h-18.274c-2.669,0-4.859,0.855-6.563,2.573c-1.718,1.708-2.573,3.897-2.573,6.563v91.361
@@ -46,6 +46,8 @@
 import axios from 'axios'
 import Group from '@/components/Group'
 import { mapActions, mapGetters } from 'vuex'
+import { apiUrl } from '@/utils/url'
+import { trim } from 'lodash'
 
 export default {
   components: {
@@ -70,6 +72,14 @@ export default {
       'config',
       'groups'
     ]),
+
+    apiUrl () {
+      let url = this.config.url
+      let base = trim(window.location.origin, '/')
+      let path = trim(this.config.api_url, '/')
+
+      return url ? url : base+'/'+path
+    }
   },
 
   methods: {

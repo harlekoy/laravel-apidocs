@@ -1,5 +1,7 @@
 import Vue from 'vue'
 
 export function apiUrl () {
-  return document.head.querySelector('meta[name=api_url]').content
+  let url = document.head.querySelector('meta[name=api_url]').content
+
+  return url ? url : '/'
 }

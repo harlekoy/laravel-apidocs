@@ -9,14 +9,14 @@ return [
 
     'version' => 'v1.0.0',
 
-    'url' => env('APP_URL', '/'),
+    'url' => env('API_URL'),
 
-    'api_url' => env('APP_URL', '/').'/api/v1',
+    'api_url' => env('API_URL').'/api/v1',
 
     'group_open' => true,
 
     'middleware' => [
         'web',
         Authenticate::class,
-    ]
+    ],
 ];
