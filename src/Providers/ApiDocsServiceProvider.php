@@ -4,6 +4,7 @@ namespace Harlekoy\ApiDocs\Providers;
 
 use Harlekoy\ApiDocs\ApiDocs;
 use Harlekoy\ApiDocs\Commands\ApiDocsInstall;
+use Harlekoy\ApiDocs\Commands\ApiRouteListCommand;
 use Harlekoy\ApiDocs\Commands\InstallCommand;
 use Harlekoy\ApiDocs\Commands\PublishCommand;
 use Harlekoy\ApiDocs\Providers\ApiDocsRouteServiceProvider;
@@ -69,6 +70,7 @@ class ApiDocsServiceProvider extends ServiceProvider
         // Registering package commands.
         $this->commands([
             ApiDocsInstall::class,
+            ApiRouteListCommand::class,
             PublishCommand::class,
         ]);
     }

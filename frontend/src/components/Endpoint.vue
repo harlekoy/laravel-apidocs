@@ -39,7 +39,12 @@
       @executed="request"
     />
 
-    <Response v-model="response" :status="status" />
+    <Response
+      v-model="response"
+      :status="status"
+      :sample="api.sample_response"
+      @status="changeStatus"
+    />
   </div>
 </div>
 </template>
@@ -54,7 +59,7 @@ import Response from '@/components/Response'
 import { isEmpty, get, split, last } from 'lodash'
 import { mapGetters } from 'vuex'
 import { success, fail } from '@/utils/toast'
-import { each } from 'lodash'
+import { each, isString } from 'lodash'
 
 export default {
   components: {
@@ -83,7 +88,7 @@ export default {
       response: {},
       json: {},
       show: false,
-      status: -1,
+      status: null,
     }
   },
 
@@ -144,7 +149,7 @@ export default {
       })
 
       return endpoint
-    }
+    },
   },
 
   methods: {
@@ -186,6 +191,10 @@ export default {
       }
 
       this.$refs.params.finish()
+    },
+
+    changeStatus (status) {
+      this.status = status
     }
   }
 }

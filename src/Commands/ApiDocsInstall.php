@@ -3,23 +3,21 @@
 namespace Harlekoy\ApiDocs\Commands;
 
 use Harlekoy\ApiDocs\ApiGroup;
+use Harlekoy\ApiDocs\Traits\AskForApiInfo;
 use Illuminate\Console\Command;
 use Illuminate\Console\DetectsApplicationNamespace;
-use Illuminate\Foundation\Console\RouteListCommand;
-use Illuminate\Routing\Route;
-use Illuminate\Routing\Router;
 use Illuminate\Support\Str;
 
-class ApiDocsInstall extends RouteListCommand
+class ApiDocsInstall extends Command
 {
-    use DetectsApplicationNamespace;
+    use DetectsApplicationNamespace, AskForApiInfo;
 
     /**
-     * The console command name.
+     * The name and signature of the console command.
      *
      * @var string
      */
-    protected $name = 'apidocs:install';
+    protected $signature = 'apidocs:install';
 
     /**
      * The console command description.
@@ -27,43 +25,6 @@ class ApiDocsInstall extends RouteListCommand
      * @var string
      */
     protected $description = 'Install API docs route list';
-
-    /**
-     * @var string
-     */
-    protected $prefix = 'api';
-
-    /**
-     * @var string
-     */
-    protected $middleware = 'api';
-
-    /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
-    public function __construct(Router $router)
-    {
-        parent::__construct($router);
-
-        $this->router = $router;
-        $this->routes = $router->getRoutes();
-    }
-
-    /**
-     * Ask this question before generating the list of API docs.
-     *
-     * @return void
-     */
-    public function asks()
-    {
-        $this->middleware = $this->ask(
-            'Enter name to customize the middleware used to generate this doc? Default:', 'api'
-        );
-
-        $this->prefix = $this->ask('Enter api prefix and version? Default:', 'api');
-    }
 
     /**
      * Execute the console command.
@@ -85,30 +46,22 @@ class ApiDocsInstall extends RouteListCommand
 
         $this->registerApiDocsConfig();
         $this->registerApiDocsServiceProvider();
-        $this->registerApiRouteList();
+        $this->registerApiRoutes();
 
         $this->info('API Docs scaffolding installed successfully.');
     }
 
     /**
-     * Register API route list.
+     * Register API routes.
      *
      * @return void
      */
-    public function registerApiRouteList()
+    public function registerApiRoutes()
     {
-        foreach ($this->filterRoutes() as $title => $endpoints) {
-            $group = ApiGroup::create([
-                'name' => $title,
-            ]);
-
-            foreach ($endpoints as $endpoint) {
-                $group->endpoints()->create([
-                    'method'   => str_replace(['|HEAD', '|PATCH'], '', $endpoint['method']),
-                    'endpoint' => $endpoint['uri'],
-                ]);
-            }
-        }
+        $this->callSilent('apidocs:routes', [
+            '--middleware' => $this->middleware,
+            '--prefix'     => $this->prefix,
+        ]);
 
         $this->comment('Scafolding API route list...');
     }
@@ -164,33 +117,5 @@ class ApiDocsInstall extends RouteListCommand
             "namespace {$namespace}\Providers;",
             file_get_contents(app_path('Providers/ApiDocsServiceProvider.php'))
         ));
-    }
-
-    public function filterRoutes()
-    {
-        return collect($this->getRoutes())
-            ->filter(function ($route) {
-                $middlewares = explode(
-                    ',', array_get($route, 'middleware', '')
-                );
-
-                return in_array($this->middleware, $middlewares)
-                    && str_contains(array_get($route, 'uri'), $this->prefix);
-            })
-            ->map(function ($route) {
-                $uri = array_get($route, 'uri');
-
-                return array_merge($route, [
-                    'uri' => str_replace($this->prefix, '', $uri),
-                ]);
-            })
-            ->groupBy(function ($route) {
-                $uri = array_get($route, 'uri');
-                $route = preg_replace('/\/\{\w+\}/', '',$uri);
-                $fields = array_filter(explode('/', $route));
-                $title = implode(' ', $fields);
-
-                return ucfirst($title);
-            });
     }
 }

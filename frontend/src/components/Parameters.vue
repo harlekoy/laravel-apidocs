@@ -82,6 +82,7 @@ export default {
       immediate: true,
       handler (current) {
         this.json = current
+        this.data = current.parameters
       }
     },
 

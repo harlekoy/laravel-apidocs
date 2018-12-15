@@ -2,14 +2,9 @@
 <div class="bg-white response">
   <h3 class="relative flex items-center border-t block bg-grey-lighter py-2 px-4 shadow text-grey-darker">
     Response
-    <span v-if="!hasResponse" class="ml-2 text-xs text-grey">(Empty)</span>
-    <span v-else
-      :class="{
-        'text-red-dark': status >= 300,
-        'text-green-dark': status < 300,
-      }"
-      class="ml-2 text-xs"
-    >({{ status }})</span>
+    <span :class="statusClass"
+      class="ml-2 text-xs text-grey"
+    >({{ displayStatus }})</span>
     <a
       v-if="hasResponse"
       href="#"
@@ -38,7 +33,7 @@
       </svg>
     </a>
   </h3>
-  <div v-if="hasResponse" class="mt-1">
+  <div v-if="hasResponse || hasSample" class="mt-1">
     <v-jsoneditor
       v-model="json"
       :options="options"
@@ -63,9 +58,11 @@ export default {
     },
     status: {
       type: Number,
-      required: true,
+    },
+    sample: {
+      type: Object,
       default () {
-        return -1
+        return null
       }
     }
   },
@@ -83,7 +80,11 @@ export default {
     value: {
       immediate: true,
       handler (current) {
-        this.json = current
+        if (isEmpty(current)) {
+          this.json = this.sample
+        } else {
+          this.json = current
+        }
       }
     },
 
@@ -94,11 +95,39 @@ export default {
 
   computed: {
     hasResponse () {
-      return !isEmpty(this.json)
+      return this.status !== null
+    },
+
+    hasSample () {
+      return !isEmpty(this.sample)
     },
 
     strJson () {
       return JSON.stringify(this.json)
+    },
+
+    displayStatus () {
+      if (this.status) {
+        return this.status
+      }
+
+      if (this.sample) {
+        return 'Sample'
+      } else {
+        return 'Empty'
+      }
+    },
+
+    statusClass () {
+      if (!this.hasResponse) {
+        return 'text-grey'
+      }
+
+      if (this.status >= 300) {
+        return 'text-red-dark'
+      } else if (this.status < 300) {
+        return 'text-green-dark'
+      }
     }
   },
 
@@ -115,7 +144,8 @@ export default {
     },
 
     clear () {
-      this.json =  ''
+      this.json =  this.sample
+      this.$emit('status', null)
       success({
         title: '',
         text: 'Cleared.',

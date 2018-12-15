@@ -33,6 +33,14 @@ $ php artisan apidocs:install
 
 When updating, you should re-publish API Docs's assets:
 
+## Reread API routes from Laravel `route:list`
+
+```
+php artisan apidocs:routes
+```
+
+When updating, you should re-publish API Docs's assets:
+
 ``` bash
 $ php artisan apidocs:publish
 ```
