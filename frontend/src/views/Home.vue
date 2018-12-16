@@ -7,7 +7,7 @@
           <span class="ml-2 rounded-full bg-grey-light p-1 text-grey-darkest text-xs">{{ config.version }}</span>
         </h1>
         <a class="text-grey-darker hover:text-blue flex"
-          :href="config.api_url">
+          :href="apiUrl">
           {{ apiUrl }}
           <svg class="ml-2 w-4 h-4 fill-current" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 511.626 511.627" style="enable-background:new 0 0 511.626 511.627;" xml:space="preserve">
           <g>
@@ -78,7 +78,7 @@ export default {
       let base = trim(window.location.origin, '/')
       let path = trim(this.config.api_url, '/')
 
-      return url ? url : base+'/'+path
+      return url ? path : base+'/'+path
     }
   },
 

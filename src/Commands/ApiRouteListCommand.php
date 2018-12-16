@@ -3,10 +3,13 @@
 namespace Harlekoy\ApiDocs\Commands;
 
 use Harlekoy\ApiDocs\ApiGroup;
+use Harlekoy\ApiDocs\Contracts\ApiEndpointRepository;
+use Harlekoy\ApiDocs\Contracts\ApiGroupRepository;
 use Harlekoy\ApiDocs\Endpoint;
 use Harlekoy\ApiDocs\Traits\AskForApiInfo;
 use Illuminate\Foundation\Console\RouteListCommand;
 use Illuminate\Routing\Router;
+use Illuminate\Support\Facades\Cache;
 use Symfony\Component\Console\Input\InputOption;
 
 class ApiRouteListCommand extends RouteListCommand
@@ -28,6 +31,16 @@ class ApiRouteListCommand extends RouteListCommand
     protected $description = 'List all registered API routes';
 
     /**
+     * @var \Harlekoy\ApiDocs\Contracts\ApiGroupRepository
+     */
+    protected $group;
+
+    /**
+     * @var \Harlekoy\ApiDocs\Contracts\ApiEndpointRepository
+     */
+    protected $endpoint;
+
+    /**
      * Create a new command instance.
      *
      * @return void
@@ -38,6 +51,10 @@ class ApiRouteListCommand extends RouteListCommand
 
         $this->router = $router;
         $this->routes = $router->getRoutes();
+
+        // Repositories
+        $this->group = app(ApiGroupRepository::class);
+        $this->endpoint = app(ApiEndpointRepository::class);
     }
 
     /**
@@ -48,7 +65,6 @@ class ApiRouteListCommand extends RouteListCommand
     public function handle()
     {
         $this->asks();
-
         $this->registerApiRouteList();
     }
 
@@ -60,20 +76,18 @@ class ApiRouteListCommand extends RouteListCommand
     public function registerApiRouteList()
     {
         foreach ($this->filterRoutes() as $title => $endpoints) {
-            $group = ApiGroup::firstOrNew(
-                ['name' => $title],
-                ['name' => $title]
-            );
-            $group->save();
+            $groupId = $this->group->save(['name' => $title]);
 
             foreach ($endpoints as $endpoint) {
-                Endpoint::updateOrCreate(['endpoint' => $endpoint['uri']], [
-                    'api_group_id' => $group->id,
-                    'method'       => str_replace(['|HEAD', '|PATCH'], '', $endpoint['method']),
+                $this->endpoint->save([
                     'endpoint'     => $endpoint['uri'],
+                    'api_group_id' => $groupId,
+                    'method'       => str_replace(['|HEAD', '|PATCH'], '', $endpoint['method']),
                 ]);
             }
         }
+
+        Cache::forget('apidocs:endpoints');
 
         $this->comment('Scafolding API route list...');
     }

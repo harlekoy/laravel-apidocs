@@ -12,7 +12,8 @@
     "homepage": "https://github.com/harlekoy/apidocs",
     "keywords": ["Laravel", "API Docs"],
     "require": {
-        "illuminate/support": "~5"
+        "illuminate/support": "~5",
+        "webpatser/laravel-uuid": "^3.0"
     },
     "require-dev": {
         "phpunit/phpunit": "~7.0",

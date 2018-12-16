@@ -19,4 +19,15 @@ return [
         'web',
         Authenticate::class,
     ],
+
+    'driver' => env('APIDOCS_DRIVER', 'database'),
+
+    'storage' => [
+        'database' => [
+            'connection' => env('DB_CONNECTION', 'mysql'),
+        ],
+        'file' => [
+            'path' => storage_path('app/apidocs'),
+        ],
+    ],
 ];

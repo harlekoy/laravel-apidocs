@@ -7,11 +7,16 @@ use Harlekoy\ApiDocs\Commands\ApiDocsInstall;
 use Harlekoy\ApiDocs\Commands\ApiRouteListCommand;
 use Harlekoy\ApiDocs\Commands\InstallCommand;
 use Harlekoy\ApiDocs\Commands\PublishCommand;
+use Harlekoy\ApiDocs\Drivers\Database\Traits\RegisterDatabaseDriver;
+use Harlekoy\ApiDocs\Drivers\File\Traits\RegisterFileDriver;
 use Harlekoy\ApiDocs\Providers\ApiDocsRouteServiceProvider;
 use Illuminate\Support\ServiceProvider;
 
 class ApiDocsServiceProvider extends ServiceProvider
 {
+    use RegisterDatabaseDriver,
+        RegisterFileDriver;
+
     /**
      * Perform post-registration booting of services.
      *
@@ -20,10 +25,11 @@ class ApiDocsServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerResources();
+        $this->registerMigrations();
 
         // Publishing is only necessary when using the CLI.
         if ($this->app->runningInConsole()) {
-            $this->bootForConsole();
+            $this->definePublishing();
         }
     }
 
@@ -46,6 +52,15 @@ class ApiDocsServiceProvider extends ServiceProvider
         $this->app->singleton('apidocs', function ($app) {
             return new ApiDocs;
         });
+
+        $this->registerStorageDriver();
+
+        // Registering package commands.
+        $this->commands([
+            ApiDocsInstall::class,
+            ApiRouteListCommand::class,
+            PublishCommand::class,
+        ]);
     }
 
     /**
@@ -59,23 +74,6 @@ class ApiDocsServiceProvider extends ServiceProvider
     }
 
     /**
-     * Console-specific booting.
-     *
-     * @return void
-     */
-    protected function bootForConsole()
-    {
-        $this->definePublishing();
-
-        // Registering package commands.
-        $this->commands([
-            ApiDocsInstall::class,
-            ApiRouteListCommand::class,
-            PublishCommand::class,
-        ]);
-    }
-
-    /**
      * Register the Totem resources.
      *
      * @return void
@@ -83,7 +81,6 @@ class ApiDocsServiceProvider extends ServiceProvider
     protected function registerResources()
     {
         $this->loadViewsFrom(APIDOCS_PATH.'/resources/views', 'apidocs');
-        $this->loadMigrationsFrom(APIDOCS_PATH.'/database/migrations');
     }
 
     /**
@@ -112,5 +109,19 @@ class ApiDocsServiceProvider extends ServiceProvider
         $this->publishes([
             APIDOCS_PATH.'/stubs/ApiDocsServiceProvider.stub' => app_path('Providers/ApiDocsServiceProvider.php'),
         ], 'apidocs-provider');
+    }
+
+    /**
+     * Register the package storage driver.
+     *
+     * @return void
+     */
+    protected function registerStorageDriver()
+    {
+        $driver = config('apidocs.driver');
+
+        if (method_exists($this, $method = 'register'.ucfirst($driver).'Driver')) {
+            $this->$method();
+        }
     }
 }

@@ -6,7 +6,7 @@
       class="ml-2 text-xs text-grey"
     >({{ displayStatus }})</span>
     <a
-      v-if="hasResponse"
+      v-if="hasResponse || hasSample"
       href="#"
       @click.prevent=""
       v-clipboard:copy="strJson"

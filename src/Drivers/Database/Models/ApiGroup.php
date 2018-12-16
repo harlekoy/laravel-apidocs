@@ -1,8 +1,8 @@
 <?php
 
-namespace Harlekoy\ApiDocs;
+namespace Harlekoy\ApiDocs\Drivers\Database\Models;
 
-use Harlekoy\ApiDocs\Endpoint;
+use Harlekoy\ApiDocs\Drivers\Database\Models\Endpoint;
 use Harlekoy\ApiDocs\Traits\Cachable;
 use Illuminate\Database\Eloquent\Model;
 
