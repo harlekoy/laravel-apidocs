@@ -23,7 +23,7 @@ class Group extends Resource
      *
      * @var string
      */
-    public static $model = 'Harlekoy\\ApiDocs\\ApiGroup';
+    public static $model = 'Harlekoy\ApiDocs\Drivers\Database\Models\ApiGroup';
 
     /**
      * The single value that should be used to represent the resource when being displayed.

@@ -26,7 +26,7 @@ class Endpoint extends Resource
      *
      * @var string
      */
-    public static $model = 'Harlekoy\\ApiDocs\\Endpoint';
+    public static $model = 'Harlekoy\ApiDocs\Drivers\Database\Models\Endpoint';
 
     /**
      * The single value that should be used to represent the resource when being displayed.
