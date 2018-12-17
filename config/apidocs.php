@@ -20,7 +20,7 @@ return [
         Authenticate::class,
     ],
 
-    'driver' => env('APIDOCS_DRIVER', 'database'),
+    'driver' => env('APIDOCS_DRIVER', 'file'),
 
     'storage' => [
         'database' => [
