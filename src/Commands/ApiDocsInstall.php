@@ -3,6 +3,7 @@
 namespace Harlekoy\ApiDocs\Commands;
 
 use Harlekoy\ApiDocs\ApiGroup;
+use Harlekoy\ApiDocs\Drivers\Database\Traits\RegisterDatabaseDriver;
 use Harlekoy\ApiDocs\Traits\AskForApiInfo;
 use Illuminate\Console\Command;
 use Illuminate\Console\DetectsApplicationNamespace;
@@ -10,7 +11,7 @@ use Illuminate\Support\Str;
 
 class ApiDocsInstall extends Command
 {
-    use DetectsApplicationNamespace, AskForApiInfo;
+    use DetectsApplicationNamespace, AskForApiInfo, RegisterDatabaseDriver;
 
     /**
      * The name and signature of the console command.
@@ -38,8 +39,10 @@ class ApiDocsInstall extends Command
         $this->comment('Publishing API Docs Service Provider...');
         $this->callSilent('vendor:publish', ['--tag' => 'apidocs-provider']);
 
-        $this->comment('Migrating API Docs tables...');
-        $this->callSilent('migrate');
+        if ($this->shouldMigrate()) {
+            $this->comment('Migrating API Docs tables...');
+            $this->callSilent('migrate');
+        }
 
         $this->comment('Publishing API Docs Assets...');
         $this->callSilent('vendor:publish', ['--tag' => 'apidocs-assets']);
