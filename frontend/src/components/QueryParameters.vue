@@ -26,7 +26,6 @@
 
 <script>
 import CodeEditor from '@/components/CodeEditor'
-import qs from 'qs'
 
 export default {
   props: {

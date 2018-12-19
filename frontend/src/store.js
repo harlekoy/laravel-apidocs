@@ -11,6 +11,7 @@ export default new Vuex.Store({
     groups: [],
     headers: getSavedState('apidocs.headers'),
   },
+
   mutations: {
     SET_CONFIG (state, config) {
       state.config = config
@@ -25,6 +26,7 @@ export default new Vuex.Store({
       saveState('apidocs.headers', headers)
     },
   },
+
   actions: {
     async fetchConfig ({ commit }) {
       const { data } = await axios.get('apidocs-api/config')
@@ -42,6 +44,7 @@ export default new Vuex.Store({
       commit('SET_HEADERS', headers)
     }
   },
+
   getters: {
     config (state) {
       return state.config

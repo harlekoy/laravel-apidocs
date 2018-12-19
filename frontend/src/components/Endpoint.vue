@@ -56,10 +56,9 @@ import Parameters from '@/components/Parameters'
 import qs from 'qs'
 import QueryParameters from '@/components/QueryParameters'
 import Response from '@/components/Response'
-import { isEmpty, get, split, last } from 'lodash'
+import { isEmpty, get, split, last, each, isString } from 'lodash'
 import { mapGetters } from 'vuex'
 import { success, fail } from '@/utils/toast'
-import { each, isString } from 'lodash'
 
 export default {
   components: {

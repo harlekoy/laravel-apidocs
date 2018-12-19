@@ -9,7 +9,6 @@
 
 <script>
 import QueryParameters from '@/components/QueryParameters'
-import qs from 'qs'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {

@@ -55,8 +55,8 @@
 
 <script>
 import CodeEditor from '@/components/CodeEditor'
-import { trim, each } from 'lodash'
 import { mapGetters } from 'vuex'
+import { trim, each } from 'lodash'
 
 export default {
   props: {

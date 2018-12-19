@@ -50,25 +50,6 @@ export default {
   data () {
     return {
       show: true,
-      // endpoints: [
-      //   {
-      //     method: 'post',
-      //     endpoint: '/pets',
-      //     description: 'Add new pet to the store'
-      //   }, {
-      //     method: 'put',
-      //     endpoint: '/pets/{pet}',
-      //     description: 'Update an existing pet'
-      //   }, {
-      //     method: 'get',
-      //     endpoint: '/pets',
-      //     description: 'Get list of pets'
-      //   }, {
-      //     method: 'delete',
-      //     endpoint: '/pets/{pet}',
-      //     description: 'Delete a pet'
-      //   }
-      // ]
     }
   },
 
