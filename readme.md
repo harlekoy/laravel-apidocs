@@ -76,6 +76,17 @@ If you discover any security related issues, please email me@harlekoy.com instea
 - [Harlequin Doyon][link-author]
 - [All Contributors][link-contributors]
 
+## Road map
+
+Laravel API Docs is still under development, I decided to ship it in this early stage so you can help me make it better. however, you can use it in production. Lets finish the task below so we can have a version 1 up and running with the right features needed.
+
+Here's the plan for what's coming:
+
+- [ ] Add support for API Docs custom path
+- [ ] Add transition effect for groups and endpoints accordion
+- [ ] Add a way to edit API Docs groups and endpoints in its the web interface
+- [ ] Add tests.
+
 ## License
 
 license. Please see the [license file](license.md) for more information.
