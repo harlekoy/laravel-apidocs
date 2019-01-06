@@ -5,3 +5,9 @@ export function apiUrl () {
 
   return url ? url : '/'
 }
+
+export function apiPath () {
+  let url = document.head.querySelector('meta[name=api_path]').content
+
+  return url ? url : '/'
+}

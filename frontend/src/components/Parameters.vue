@@ -12,17 +12,19 @@
       :key="index"
       class="flex items-start my-2"
     >
-      <div class="w-1/3 font-bold">{{ param }}<span class="m-1 text-red font-bold">*</span></div>
+      <div class="w-1/3 font-bold">
+        {{ param.endpoint }}<span v-if="param.required" class="m-1 text-red font-bold">*</span>
+      </div>
       <div class="w-2/3">
         <!-- <div class="description">
           ID of pet to return
         </div> -->
 
         <input
-          v-model="params[param]"
+          v-model="params[param.endpoint + (param.required ? '?' : '')]"
           class="p-2 rounded"
           type="text"
-          :placeholder="param"
+          :placeholder="param.endpoint"
         />
       </div>
     </div>
@@ -115,11 +117,16 @@ export default {
     ...mapGetters(['config']),
 
     routeParams () {
-      let params = this.json.endpoint.match(/\{\w+\}/g)
+      let params = this.json.endpoint.match(/\{\w+\??\}/g)
 
       if (params) {
         return params.map((field) => {
-          return trim(field, '{}')
+          let endpoint = trim(trim(field, '{}'), '?')
+
+          return {
+            endpoint,
+            required: !field.includes('?')
+          }
         })
       }
 

@@ -82,10 +82,11 @@ Laravel API Docs is still under development, I decided to ship it in this early 
 
 Here's the plan for what's coming:
 
-- [ ] Add support for API Docs custom path
+- [x] Add support for API Docs custom path
 - [ ] Add transition effect for groups and endpoints accordion
 - [ ] Add a way to edit API Docs groups and endpoints in its the web interface
 - [ ] Add tests.
+- [ ] Add validation for required parameters
 
 ## License
 

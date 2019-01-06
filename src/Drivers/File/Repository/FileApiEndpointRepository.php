@@ -64,7 +64,7 @@ class FileApiEndpointRepository implements Contract
     protected function title($endpoint)
     {
         $uri = array_get($endpoint, 'endpoint');
-        $route = preg_replace('/\/\{\w+\}/', '',$uri);
+        $route = preg_replace('/\/\{\w+\??\}/', '',$uri);
         $fields = array_filter(explode('/', $route));
         $title = implode(' ', $fields);
 

@@ -53,7 +53,7 @@ class ApiDocsRouteServiceProvider extends RouteServiceProvider
      */
     protected function mapApiRoutes()
     {
-        Route::prefix(config('apidocs.path').'-api')
+        Route::prefix('apidocs-api')
             ->namespace($this->namespace)
             ->group(__DIR__.'/../../routes/api.php');
     }

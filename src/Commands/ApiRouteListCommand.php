@@ -117,8 +117,9 @@ class ApiRouteListCommand extends RouteListCommand
             })
             ->groupBy(function ($route) {
                 $uri = array_get($route, 'uri');
-                $route = preg_replace('/\/\{\w+\}/', '',$uri);
+                $route = preg_replace('/\/\{\w+\??\}/', '',$uri);
                 $fields = array_filter(explode('/', $route));
+
                 $title = implode(' ', $fields);
 
                 return ucfirst($title);
