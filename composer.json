@@ -1,5 +1,5 @@
 {
-    "name": "harlekoy/apidocs",
+    "name": "harlekoy/laravel-apidocs",
     "description": "Replacement for Swagger. It is built for Laravel",
     "license": "MIT",
     "authors": [
@@ -13,6 +13,7 @@
     "keywords": ["Laravel", "API Docs"],
     "require": {
         "illuminate/support": "~5",
+        "laravel/framework": "5.7.*",
         "webpatser/laravel-uuid": "^3.0"
     },
     "require-dev": {

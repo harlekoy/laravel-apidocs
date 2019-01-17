@@ -111,7 +111,7 @@ class FileApiEndpointRepository implements Contract
         $content = $this->file
             ->get()
             ->transform(function ($item) use ($data) {
-                return array_get($item, 'endpoint') === array_get($data, 'endpoint') ||
+                return array_get($item, 'endpoint') === array_get($data, 'endpoint') &&
                     array_get($item, 'method') === array_get($data, 'method')
                     ? array_merge($item, $data)
                     : $item;

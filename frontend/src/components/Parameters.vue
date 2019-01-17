@@ -21,7 +21,7 @@
         </div> -->
 
         <input
-          v-model="params[param.endpoint + (param.required ? '?' : '')]"
+          v-model="params[param.endpoint + (param.required ? '' : '?')]"
           class="p-2 rounded"
           type="text"
           :placeholder="param.endpoint"
