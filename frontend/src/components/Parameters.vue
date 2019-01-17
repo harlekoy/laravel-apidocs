@@ -137,7 +137,10 @@ export default {
       let endpoint = this.json.endpoint
 
       each(this.routeParams, (param) => {
-        endpoint = endpoint.replace('{'+param+'}', this.params[param])
+        let suffix = param.required ? '' : '?'
+        let routeName = param.endpoint+suffix
+
+        endpoint = endpoint.replace('{'+routeName+'}', this.params[routeName])
       })
 
       return this.config.api_url+endpoint
