@@ -13,7 +13,7 @@
     "keywords": ["Laravel", "API Docs"],
     "require": {
         "illuminate/support": "~5",
-        "laravel/framework": "5.7.*",
+        "laravel/framework": "5.7.*|5.8.*",
         "webpatser/laravel-uuid": "^3.0"
     },
     "require-dev": {
